@@ -12,7 +12,7 @@ const dbConfig: DataSourceOptions = {
     type: 'mysql',
     host: 'localhost',
     port: dbPort,
-    username: process.env.DB_HOST as string,
+    username: process.env.DB_USER as string,
     password: process.env.DB_PASSWORD as string,
     database: process.env.DB_DATABASENAME as string,
     synchronize: true,
