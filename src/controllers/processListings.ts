@@ -1,12 +1,13 @@
-import { getConnection, MoreThan, getRepository } from 'typeorm';
+import {  MoreThan } from 'typeorm';
+import dbConfig from '../database configuration/dbconfig';
 import { Token } from '../entities/Token';
 import { Activity } from '../entities/Activity';
 import logger from '../../bunyanlogger';
 
 const processListings = async (): Promise<void> => {
     try {
-        const activityRepository = getRepository(Activity);
-        const tokenRepository = getRepository(Token);
+        const activityRepository = dbConfig.getRepository(Activity);
+        const tokenRepository = dbConfig.getRepository(Token);
 
         const activities = await activityRepository.find();
 

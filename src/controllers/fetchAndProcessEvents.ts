@@ -4,6 +4,7 @@ import { FetchEventsResponse, Event } from "../types/types";
 import { Activity } from "../entities/Activity";
 import eventEmitter from "../emitter/events";
 import logger from "../../bunyanlogger";
+import dbConfig from "../database configuration/dbconfig";
 
 export async function fetchEvents(
   startTimestamp: number,
@@ -26,7 +27,7 @@ export async function fetchEvents(
 }
 
 export async function processEvents(events: Event[]): Promise<void> {
-  const activityRepository = getRepository(Activity);
+  const activityRepository = dbConfig.getRepository(Activity);
 
   const newOrderEvents = events.filter(
     (event) => event.event.kind === "new-order"

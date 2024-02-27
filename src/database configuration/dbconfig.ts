@@ -1,5 +1,5 @@
 // import mysql from 'mysql2'
-import { DataSourceOptions } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
 import dotenv from 'dotenv';
 import { Activity } from '../entities/Activity';
 import { Token } from '../entities/Token';
@@ -8,7 +8,7 @@ dotenv.config();
 
 const dbPort: number | undefined = process.env.DB_PORT ? parseInt(process.env.DB_PORT) : undefined;
 
-const dbConfig: DataSourceOptions = {
+const dbConfig = new DataSource({
     type: 'mysql',
     host: 'localhost',
     port: dbPort,
@@ -20,7 +20,7 @@ const dbConfig: DataSourceOptions = {
     entities: [Activity, Token],
     subscribers: [],
     migrations: []
-};
+});
 
 export default dbConfig;
 

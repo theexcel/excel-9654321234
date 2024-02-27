@@ -5,13 +5,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.processListings = void 0;
 const typeorm_1 = require("typeorm");
+const dbconfig_1 = __importDefault(require("../database configuration/dbconfig"));
 const Token_1 = require("../entities/Token");
 const Activity_1 = require("../entities/Activity");
 const bunyanlogger_1 = __importDefault(require("../../bunyanlogger"));
 const processListings = async () => {
     try {
-        const activityRepository = (0, typeorm_1.getRepository)(Activity_1.Activity);
-        const tokenRepository = (0, typeorm_1.getRepository)(Token_1.Token);
+        const activityRepository = dbconfig_1.default.getRepository(Activity_1.Activity);
+        const tokenRepository = dbconfig_1.default.getRepository(Token_1.Token);
         const activities = await activityRepository.find();
         for (const activity of activities) {
             const { contract_address, token_index, listing_to, listing_price } = activity;

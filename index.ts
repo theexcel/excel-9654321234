@@ -5,11 +5,12 @@ import dbConfig from "./src/database configuration/dbconfig";
 import { createConnection } from "typeorm"
 import job from "./src/scheduler/scheduler";
 import logger from "./bunyanlogger";
+import mysql from 'mysql2/promise';
 
 // const logger = bunyan.createLogger({ name: 'application-logger' });
 
 const app = express();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8001;
 
 app.use(expressBunyanLogger({
     name: 'express',
@@ -17,10 +18,10 @@ app.use(expressBunyanLogger({
     excludes: ['req', 'res', 'req-headers', 'res-headers', 'user-agent', 'body', 'short-body', 'incoming', 'response-hrtime']
 }));
 
-const connectDb = createConnection(dbConfig);
+const connectDb = dbConfig.initialize();
 
 
-connectDb.then( async (connection) => {
+connectDb.then( async () => {
     logger.info(`connected to MySQL database`)
     job.start()
 }).catch(error => {
