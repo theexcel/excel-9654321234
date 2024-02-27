@@ -2,10 +2,7 @@
 
 This applications fetches, process and stores data from an endpoint. It was done with Node(Express), Typescript, TypeOrm and MySQL. This applications uses a scheduler to fetch new events after every 1 minute and then process it before saving it in a particular format. It also uses an event emitter that listens whenever there is a bulk insert into the db before it processes listings/tokens.
 
-Use `npm install` to install packages
-use `tsc` to compile the Typescript code to Javascript
-use `npm start` to start/run the application
-to use the database, execk the '.env.sample' file, and put in required information
+Use `npm install` to install packages. Use `tsc` to compile the Typescript code to Javascript. Use `npm start` to start/run the application. To use the database, execk the '.env.sample' file, and put in required information
 
 
 # Additional Challenges
